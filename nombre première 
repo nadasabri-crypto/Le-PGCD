@@ -6,7 +6,7 @@ int main() {
 
     int x = a, y = b;
 
-    printf("Mahaal Al-PGCD:\n");
+    printf("les etapes du PGCD:\n");
 
     while (y != 0) {
         int r = x % y;
