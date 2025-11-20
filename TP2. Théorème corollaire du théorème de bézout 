@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+/* Fonction PGCD (Algorithme d’Euclide) */
+int pgcd(int a, int b) {
+    while (b != 0) {
+        int temp = a % b;
+        a = b;
+        b = temp;
+    }
+    return a;
+}
+
+/* Algorithme d’Euclide étendu pour calculer les coefficients de Bézout */
+int euclideEtendu(int a, int b, int *x, int *y) {
+    if (b == 0) {
+        *x = 1;
+        *y = 0;
+        return a;
+    }
+
+    int x1, y1;
+    int d = euclideEtendu(b, a % b, &x1, &y1);
+
+    *x = y1;
+    *y = x1 - (a / b) * y1;
+
+    return d;
+}
+
+int main() {
+    int a, b;
+    printf("Entrer a et b : ");
+    scanf("%d %d", &a, &b);
+
+    /* PGCD simple */
+    int d = pgcd(a, b);
+    printf("PGCD(%d, %d) = %d\n", a, b, d);
+
+    /* Coefficients de Bézout */
+    int x, y;
+    int d2 = euclideEtendu(a, b, &x, &y);
+    printf("Coefficients de Bézout : x = %d , y = %d\n", x, y);
+    printf("Verification : %d*%d + %d*%d = %d\n", a, x, b, y, d2);
+
+    return 0;
+}
